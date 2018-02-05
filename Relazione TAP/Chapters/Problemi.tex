@@ -1,0 +1,15 @@
+\chapter{Problemi incontrati}
+In questo capitolo parleremo dei problemi che abbiamo incontrato sia durante la stesura del codice che durante l'utilizzo delle tecniche oggetto di questo corso.
+\section{Uso di due differenti Database}
+Uno dei problemi che abbiamo riscontrato \`e stato utilizzare due differenti Database: MongoDB e MySQL. Questa decisione implementativa ci ha messo di fronte a un primo problema: come poter separare l'implementazione dei repository Mongo e MySQL senza dover creare necessariamente due differenti interfacce IGridService. Questo problema \`e derivato dalla necessit\`a di avere una singola interfaccia che possa interagire con due differenti database, dove per differenti si intende una differenza in questo caso anche molto sostanziale in quanto MongoDB e MySQL fanno parte di due paradigmi opposti.\\*
+Permettere di avere una sola interfaccia che possa evolversi parallelamente rispetto a come si evolve l'implementazione di una parte dei suoi metodi \`e l'intento del design pattern \emph{bridge} che \`e stato applicato delegando a un oggetto IServiceImplementor l'esecuzione delle operazioni CRUD sui database; esistono poi due implementazioni concrete di IServiceImplementor:
+\begin{itemize}
+	\item MongoImplementor
+	\item MySqlImplementor
+\end{itemize}
+A questo punto tuttavia si \`e presentato un nuovo problema relativo alla scelta di quale dei due utilizzare quando Spring Boot deve iniettare le dipendenze all'interno delle classi. Questo problema \`e stato facilmente risolto col meccanismo dei Profiles. Sono stati creati due differenti profili ("mongo") e ("mysql") ciascuno dei quali \`e progettato per utilizzare rispettivamente MongoImplementor e MySqlImplementor.\\*
+Questi profili sono utilizzati dai test mediante l'annotazione \emph{@ActiveProfiles()} mentre il file Application.properties specifica qual'\`e il profilo che dovr\`a essere utilizzato dall'applicazione a runtime.
+\section{Integration test su Mac}
+Abbiamo avuto un problema relativo all'esecuzione degli Integration Test dell'interfaccia grafica del client su Mac OS X. Il problema \`e stato risolto includendo nel POM un modulo della libreria AssertJ che era richiesto a run-time dal sistema Mac. Per essere poi sicuri che successive modifiche continuassero a non creare problemi su Mac OS, ne abbiamo abilitato la relativa build su travis grazie al meccanismo delle build \emph{matrix}.
+\section{Build Mac su Travis}
+L'ultimo problema che abbiamo avuto \`e stato la configurazione del server MySQL e MongoDB su Travis quando veniva lanciata la build su Mac OS X. Abbiamo provveduto a risolvere questo problema configurando Travis in modo tale da aggiornare mediante il comando

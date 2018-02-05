@@ -1,0 +1,23 @@
+\BOOKMARK [0][-]{chapter.1}{Sistema implementato}{}% 1
+\BOOKMARK [1][-]{section.1.1}{Panoramica ad alto livello}{chapter.1}% 2
+\BOOKMARK [0][-]{chapter.2}{Tecniche e framework utilizzati}{}% 3
+\BOOKMARK [1][-]{section.2.1}{Code versioning}{chapter.2}% 4
+\BOOKMARK [1][-]{section.2.2}{Dependencies and build tool}{chapter.2}% 5
+\BOOKMARK [1][-]{section.2.3}{Continuos integration}{chapter.2}% 6
+\BOOKMARK [1][-]{section.2.4}{Frameworks}{chapter.2}% 7
+\BOOKMARK [2][-]{subsection.2.4.1}{Spring Boot}{section.2.4}% 8
+\BOOKMARK [2][-]{subsection.2.4.2}{Framework di test}{section.2.4}% 9
+\BOOKMARK [2][-]{subsection.2.4.3}{Http Client}{section.2.4}% 10
+\BOOKMARK [2][-]{subsection.2.4.4}{GUI}{section.2.4}% 11
+\BOOKMARK [0][-]{chapter.3}{Design e scelte implementative}{}% 12
+\BOOKMARK [1][-]{section.3.1}{Server}{chapter.3}% 13
+\BOOKMARK [2][-]{subsection.3.1.1}{Rappresentazione delle griglie}{section.3.1}% 14
+\BOOKMARK [2][-]{subsection.3.1.2}{REST Controller}{section.3.1}% 15
+\BOOKMARK [2][-]{subsection.3.1.3}{Web Controller}{section.3.1}% 16
+\BOOKMARK [2][-]{subsection.3.1.4}{Algoritmo di ricerca del cammino minimo}{section.3.1}% 17
+\BOOKMARK [1][-]{section.3.2}{Client}{chapter.3}% 18
+\BOOKMARK [2][-]{subsection.3.2.1}{Interfaccia utente}{section.3.2}% 19
+\BOOKMARK [0][-]{chapter.4}{Problemi incontrati}{}% 20
+\BOOKMARK [1][-]{section.4.1}{Uso di due differenti Database}{chapter.4}% 21
+\BOOKMARK [1][-]{section.4.2}{Integration test su Mac}{chapter.4}% 22
+\BOOKMARK [1][-]{section.4.3}{Build Mac su Travis}{chapter.4}% 23

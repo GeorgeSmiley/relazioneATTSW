@@ -1,0 +1,37 @@
+\chapter{Tecniche e framework utilizzati}
+\section{Code versioning}
+Per tenere traccia della storia dei codici di Server e Client abbiamo utilizzato il software \emph{git} creando una repository locale connessa a una repository remota su \emph{github}. Le repository remote utilizzate sono disponibili per la consultazione ai seguenti URL:
+\begin{itemize}
+	\item Server - \url{https://github.com/francescosecci/sp-server-attsw}
+	\item Client - \url{https://github.com/francescosecci/sp-client-attsw}
+\end{itemize}
+L'utilizzo di \emph{git} si \`e rivelato particolarmente utile per il lavoro in gruppo, grazie al meccanismo delle \emph{pull requests}; grazie alle quali abbiamo aperto un ramo ogni qualvolta un membro del gruppo ha implementato una particolare \emph{feature} all'interno dei software. Abbiamo dunque realizzato sul master tutte le interfacce di cui gli applicativi faranno uso e creato un ramo per ogni loro singola implementazione. Quando una particolare implementazione veniva terminata, allora procedevamo al \emph{merge} del ramo sul master risolvendo gli eventuali conflitti generati, mediante l'interfaccia di \emph{github}.\\*
+Non abbiamo sollevato alcuna \emph{issue} perch\`e abbiamo lavorato per la maggior parte del tempo nel medesimo luogo fisico.\\*
+\emph{Git} \`e stato utilizzato sia da terminale, che tramite il plugin per eclipse \emph{e-git} che ci ha semplificato alcune operazioni.\\*
+\section{Dependencies and build tool}
+Per gestire le dipendenze e realizzare la build del codice, abbiamo utilizzato il software \emph{Apache Maven}, in particolare ne abbiamo utilizzato la sua integrazione nativa in eclipse.\\*
+Dal momento che occorre fornire evidenze su metriche quali \emph{code coverage} e qualit\`a del codice abbiamo realizzato i seguenti profili Maven all'interno del POM con lo scopo di eseguire differenti processi di build in relazione ai particolari plugin che era necessario legare a ciascuna fase del ciclo di vita di Maven.
+\begin{lstlisting}
+clean verify -Pjacoco coveralls:report
+clean verify -Pjacoco sonar:sonar
+clean verify -Pfailsafe
+\end{lstlisting}
+Il profilo jacoco serve a generare i report sugli unit test e ad inviarli rispettivamente ai server di \emph{Coveralls} e di \emph{SonarQube} (\emph{SonarCloud}); mentre il profilo failsafe esegue gli integration test. Questi profili sono utlizzati sia nel Client che nel Server.
+\section{Continuos integration}
+Le repository elencate in 2.1 sono collegate al server di Continuos Integration \emph{Travis} attraverso il file \emph{.travis.yml}. Questo file rappresenta lo script che \emph{Travis} deve eseguire sulle macchine remote al fine di ricreare un ambiente in cui \`e possibile lanciare le stesse build che effettuiamo anche in locale. Quando \emph{Travis} finisce di ricreare l'ambiente, allora esegue la build come specificato sempre nel file \emph{.travis.yml}. Dal momento che ciascuna build viene eseguita usando i profili Jacoco e Failsafe definiti nel POM, questa genera i report su \emph{Coveralls} e \emph{SonarCloud} sia nel caso in cui la build venga fatta in locale che da \emph{Travis}. 
+\section{Frameworks}
+\subsection{Spring Boot}
+Nel capitolo 1 si menziona Spring Boot quale framework utilizzato per realizzare il Server. Spring Boot \`e un particolare framework che facilita il programmatore nella realizzazione di una \emph{web-app} evitando allo stesso di utilizzare direttamente le Servlet Java. Spring Boot implementa inoltre il meccanismo di \emph{Inversion of Control} che rende necessaria la \emph{Depencency Injection}. La \emph{Dependency Injection} \`e necessaria poich\'e springboot esegue la web-app all'interno di un web container il quale si trova a sua volta all'interno di un server, es. Tomcat. Infatti, proprio perch\'e la web-app viene lanciata all'interno di un web container, non possiamo avere il totale controllo sull'istanziazione degli oggetti a run-time.\\*
+Le principali funzionalit\`a messe a disposizione da Spring Boot che abbiamo utilizzato sono le repository per i database e i controller per interfacciare la web-app verso l'esterno.\\*
+Per realizzare il Server, al posto di eclipse, \`e stato utilizzato Spring Tool Suite, il quale ne rappresenta una versione modificata ad hoc.
+\subsubsection{Database utilizzati}
+Il Server utilizza due differenti database: MongoDB e MySQL. Spring Boot permette di passare facilmente dall'utilizzare l'uno o l'altro grazie al meccanismo dei \emph{Profiles} che verr\`a spiegato nel dettaglio in seguito.
+\subsubsection{Template engine}
+Spring Boot, per renderizzare le pagine html che un client pu\`o richiedere, utilizza l'engine \emph{Thymeleaf}.
+\subsection{Framework di test}
+Grazie alla sua facile integrazione con eclipse, gli unit test e gli integration test vengono eseguiti in locale utilizzando il framework \emph{Junit}. Per testare la corretta realizzazione dell'interfaccia utente di cui fa uso il client abbiamo utilizzato il framework \emph{AssertJ}, che ci ha permesso di scrivere asserzioni sulle componenti grafiche realizzate.\\*
+L'interfaccia del Client non \`e la sola interfaccia utente realizzata, infatti, come gi\`a specificato nel capitolo 1, il Server predispone un'interfaccia web dedicata alle operazioni CRUD sui database. Per testare questa interfaccia, che \`e necessariamente un'interfaccia HTML, abbiamo utilizzato il framework HtmlUnit.
+\subsection{Http Client}
+Per implementare le richieste HTTP del Client abbiamo scelto il framework \emph{Apache HttpClient} che mette a disposizione le classi necessarie per effettuare richieste HTTP su un particolare server (es. GET oppure POST) evitando di scrivere direttamente codice che usi le classiche Socket.
+\subsection{GUI}
+Il framework scelto per la realizzazione dell'interfaccia grafica \`e \emph{Swing}. Questo framework ci ha permesso di integrare Apache Http Client con una semplice interfaccia utente composta da una singola finestra (JFrame).

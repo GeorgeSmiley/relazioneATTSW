@@ -14,15 +14,15 @@
 \documentclass[twoside,openright,titlepage,fleqn,
 ,	headinclude,12pt,a4paper,BCOR5mm,footinclude,table]{scrbook}
 %--------------------------------------------------------------
-\newcommand{\myItalianTitle}{Confronto di due metodi per il rilevamento di strutture core/periphery in reti sociali\xspace}
-\newcommand{\myEnglishTitle}{A comparison of two algorithms for detecting core/periphery structures in social networks\xspace}
+\newcommand{\myItalianTitle}{Ricerca del cammino minimo in un grafo con topologia a griglia\xspace}
+\newcommand{\myEnglishTitle}{\xspace}
 % use the right myDegree option
-\newcommand{\myDegree}{Corso di Laurea in Informatica\xspace}
+\newcommand{\myDegree}{Corso di Laurea Magistrale in Informatica\xspace}
 %\newcommand{\myDegree}{
 	%Corso di Laurea Specialistica in Scienze e Tecnologie 
 	%dell'Informazione\xspace}
-\newcommand{\myName}{Tommaso Puccetti\xspace}
-\newcommand{\myProf}{Pierluigi Crescenzi\xspace}
+\newcommand{\myName}{Tommaso Puccetti, Alex Foglia, Francesco Secci\xspace}
+\newcommand{\myProf}{\xspace}
 \newcommand{\myOtherProf}{Nome Cognome\xspace}
 \newcommand{\mySupervisor}{Nome Cognome\xspace}
 \newcommand{\myFaculty}{
@@ -30,7 +30,7 @@
 \newcommand{\myUni}{\protect{
 	Universit\`a degli Studi di Firenze}\xspace}
 \newcommand{\myLocation}{Firenze\xspace}
-\newcommand{\myTime}{Anno Accademico 2016-2017\xspace}
+\newcommand{\myTime}{Anno Accademico 2017-2018\xspace}
 \newcommand{\myVersion}{Version 0.1\xspace}
 %--------------------------------------------------------------
 
@@ -127,7 +127,7 @@ parts]{classicthesis}
 %--------------------------------------------------------------
 
 
-\include{titlePage}
+
 
 \pagestyle{scrheadings}
 %--------------------------------------------------------------
@@ -141,9 +141,14 @@ parts]{classicthesis}
 %\cleardoublepage\myPart{Part II}
 %\include{chapter02}
 %\include{chapter03}
+\include{titlePage}
 \tableofcontents
 \listoftables
 \listoffigures
+\include{Chapters/Implementazione}
+\include{Chapters/Tecniche}
+\include{Chapters/Design}
+\include{Chapters/Problemi}
 
 
 
