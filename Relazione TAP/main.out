@@ -18,6 +18,10 @@
 \BOOKMARK [1][-]{section.3.2}{Client}{chapter.3}% 18
 \BOOKMARK [2][-]{subsection.3.2.1}{Interfaccia utente}{section.3.2}% 19
 \BOOKMARK [0][-]{chapter.4}{Problemi incontrati}{}% 20
-\BOOKMARK [1][-]{section.4.1}{Uso di due differenti Database}{chapter.4}% 21
-\BOOKMARK [1][-]{section.4.2}{Integration test su Mac}{chapter.4}% 22
-\BOOKMARK [1][-]{section.4.3}{Build Mac su Travis}{chapter.4}% 23
+\BOOKMARK [1][-]{section.4.1}{Integration test su Mac}{chapter.4}% 21
+\BOOKMARK [1][-]{section.4.2}{Build Mac del Server su Travis}{chapter.4}% 22
+\BOOKMARK [1][-]{section.4.3}{End to end test}{chapter.4}% 23
+\BOOKMARK [1][-]{section.4.4}{Deployment su heroku}{chapter.4}% 24
+\BOOKMARK [1][-]{section.4.5}{Utilizzo di due differenti database}{chapter.4}% 25
+\BOOKMARK [1][-]{section.4.6}{Mutation testing con PitClipse}{chapter.4}% 26
+\BOOKMARK [1][-]{section.4.7}{Testing dell'interfaccia grafica}{chapter.4}% 27

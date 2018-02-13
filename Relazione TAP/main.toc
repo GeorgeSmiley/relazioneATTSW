@@ -9,21 +9,25 @@
 \contentsline {section}{\numberline {2.3}Continuos integration}{14}{section.2.3}
 \contentsline {section}{\numberline {2.4}Frameworks}{14}{section.2.4}
 \contentsline {subsection}{\numberline {2.4.1}Spring Boot}{14}{subsection.2.4.1}
-\contentsline {subsubsection}{Database utilizzati}{15}{subsection.2.4.1}
+\contentsline {subsubsection}{Scelta del database}{15}{subsection.2.4.1}
 \contentsline {subsubsection}{Template engine}{15}{subsection.2.4.1}
 \contentsline {subsection}{\numberline {2.4.2}Framework di test}{15}{subsection.2.4.2}
-\contentsline {subsection}{\numberline {2.4.3}Http Client}{15}{subsection.2.4.3}
+\contentsline {subsection}{\numberline {2.4.3}Http Client}{16}{subsection.2.4.3}
 \contentsline {subsection}{\numberline {2.4.4}GUI}{16}{subsection.2.4.4}
 \contentsline {chapter}{\numberline {3}Design e scelte implementative}{17}{chapter.3}
 \contentsline {section}{\numberline {3.1}Server}{17}{section.3.1}
 \contentsline {subsection}{\numberline {3.1.1}Rappresentazione delle griglie}{18}{subsection.3.1.1}
 \contentsline {subsection}{\numberline {3.1.2}REST Controller}{18}{subsection.3.1.2}
 \contentsline {subsection}{\numberline {3.1.3}Web Controller}{19}{subsection.3.1.3}
-\contentsline {subsection}{\numberline {3.1.4}Algoritmo di ricerca del cammino minimo}{19}{subsection.3.1.4}
-\contentsline {section}{\numberline {3.2}Client}{20}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}Interfaccia utente}{20}{subsection.3.2.1}
-\contentsline {subsubsection}{Implementazione dell'interfaccia}{22}{figure.caption.9}
-\contentsline {chapter}{\numberline {4}Problemi incontrati}{23}{chapter.4}
-\contentsline {section}{\numberline {4.1}Uso di due differenti Database}{23}{section.4.1}
-\contentsline {section}{\numberline {4.2}Integration test su Mac}{23}{section.4.2}
-\contentsline {section}{\numberline {4.3}Build Mac su Travis}{23}{section.4.3}
+\contentsline {subsection}{\numberline {3.1.4}Algoritmo di ricerca del cammino minimo}{21}{subsection.3.1.4}
+\contentsline {section}{\numberline {3.2}Client}{22}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Interfaccia utente}{23}{subsection.3.2.1}
+\contentsline {subsubsection}{Implementazione dell'interfaccia}{24}{figure.caption.14}
+\contentsline {chapter}{\numberline {4}Problemi incontrati}{27}{chapter.4}
+\contentsline {section}{\numberline {4.1}Integration test su Mac}{27}{section.4.1}
+\contentsline {section}{\numberline {4.2}Build Mac del Server su Travis}{27}{section.4.2}
+\contentsline {section}{\numberline {4.3}End to end test}{27}{section.4.3}
+\contentsline {section}{\numberline {4.4}Deployment su heroku}{28}{section.4.4}
+\contentsline {section}{\numberline {4.5}Utilizzo di due differenti database}{28}{section.4.5}
+\contentsline {section}{\numberline {4.6}Mutation testing con PitClipse}{29}{section.4.6}
+\contentsline {section}{\numberline {4.7}Testing dell'interfaccia grafica}{29}{section.4.7}

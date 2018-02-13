@@ -2,13 +2,13 @@
 
 \section{Server}
 
-Come gi\`a specificato nei precedenti capitoli, il Server deve esporre verso l'esterno due interfacce: l'interfaccia REST e l'interfaccia Web. Lo scopo della prima \`e quello di fornire un'interfaccia che consenta a un client di poter:
+Come gi\`a specificato nei precedenti capitoli, il Server deve esporre verso l'esterno due interfacce: l'interfaccia REST e l'interfaccia Web. Lo scopo della prima \`e quello di fornire un'interfaccia che consenta a un utente di poter:
 \begin{itemize}
 	\item Ricevere la lista di tutte le griglie presenti sul Server;
 	\item Visualizzare una particolare griglia tra quelle disponibili;
 	\item Richiedere un cammino minimo fra due nodi di una particolare griglia.
 \end{itemize}
-Per l'interfaccia Web, invece, \`e previsto che questa debba permettere a un client di:
+Per l'interfaccia Web, invece, \`e previsto che questa debba permettere all'utente di:
 \begin{itemize}
 	\item Inserire una griglia nel database;
 	\item Visualizzare tutte le griglie salvate nel database;
@@ -16,28 +16,70 @@ Per l'interfaccia Web, invece, \`e previsto che questa debba permettere a un cli
 \end{itemize}
 Entrambe le interfacce fanno uso di un'interfaccia interna all'applicazione: l'interfaccia \emph{IGridService}. Questa interfaccia ha il compito di fornire le operazioni necessarie per svolgere la funzione prevista dal sistema, ossia chi usa IGridService non vede i dettagli implementativi riguardanti come le operazioni di lettura e scrittura sul database vengono effettivamente realizzate. IGridService fornisce inoltre l'operazione di ricerca del cammino minimo, i cui dettagli verranno spiegati in seguito.
 \subsection{Rappresentazione delle griglie}
-Un oggetto griglia salvato nel database, viene visto dall'interfaccia IGridService come un'istanza della classe \emph{DatabaseGrid}. Questa classe \`e un wrapper di una matrice di interi, la quale rappresenta il grafo. La classe DatabaseGrid aggiunge inoltre informazioni su una griglia associando ad essa un intero (id) e un intero che rappresenta la dimensione massima di righe e colonne che la matrice pu\`o avere (n). 
-Nonostante questa scelta sembra perdere di generalit\`a, in quanto considera solamente matrici quadrate, in realt\`a se volessimo rappresentare una griglia che non \`e in generale quadrata, sarebbe sufficiente porre a 0 le righe o le colonne che non si vuole facciano parte del grafo.\\*
-Nel caso in cui si stia usando il Database Mongo, tramite l'interfaccia MongoRepository di Spring Boot, possiamo inserire e leggere oggetti DatabaseGrid dal database Mongo; mentre nel caso in cui si stia usando il Database MySql, la sua repository non pu\`o mappare oggetti DatabaseGrid a particolari istanze interne al database perch\`e il campo matrice non \`e un tipo di dato primitivo per un database SQL. Per ovviare a questa problematica abbiamo creato la classe SqlGrid che sostiuisce il campo matrice con un campo stringa che rappresenta la matrice stessa. Esistono infine due metodi simmetrici all'interno delle classi SqlGrid e DatabaseGrid che consentono di convertire un'istanza di una classe in un'istanza dell'altra, preservando l'isomorfismo tra i due grafi che esse rappresentano.
+Un oggetto griglia salvato nel database, viene visto dall'interfaccia IGridService come un'istanza della classe \emph{DatabaseGrid}. Questa classe \`e un wrapper di una matrice di interi, la quale rappresenta il grafo. La classe DatabaseGrid aggiunge inoltre informazioni su una griglia associando ad essa un intero (id) e un intero n che rappresenta il numero massimo di righe e colonne che devono essere lette dalla matrice wrappata per estrapolarne la griglia.\\*
+Nonostante questa scelta sembra perdere di generalit\`a, in quanto considera solamente matrici quadrate, in realt\`a se volessimo rappresentare una griglia che non sia in generale quadrata, sarebbe sufficiente porre a 0 le righe o le colonne che non si vuole facciano parte del grafo.\\*
 \subsection{REST Controller}
 Il REST Controller che abbiamo realizzato \`e una classe, opportunamente annotata secondo la struttura di Spring Boot, che a run-time serve determinate richieste HTTP su tre particolari URL:
 \begin{itemize}
-	\item /api/ $\rightarrow$ restituisce al client la lista JSON di tutte le griglie presenti nel database;
-	\item /api/grid$[i]$ $\rightarrow$ restituisce al client l'oggetto griglia avente id=i  (serializzato come oggetto JSON);
-	\item /api/path$[SOURCE]$TO$[SINK]$IN$[ID]$ $\rightarrow$ restituisce al client una lista JSON di stringhe rappresentanti i nodi che fanno parte del cammino minimo nel grafo con id=ID partendo dal nodo SOURCE e finendo nel nodo SINK. Se il cammino non esiste, viene restituita una lista vuota.
+	\item /api/ $\rightarrow$ restituisce al client una lista JSON di stringhe rappresentanti ciascun ID delle griglie salvate nel database.
+	\item /api/grid$[i]$ $\rightarrow$ restituisce al client l'oggetto griglia avente id='i'  (serializzato come oggetto JSON);
+	\item /api/path$[SOURCE]$TO$[SINK]$IN$[ID]$ $\rightarrow$ restituisce al client una lista JSON di stringhe rappresentanti i nodi che fanno parte del cammino minimo nel grafo con id='ID' partendo dal nodo 'SOURCE' e finendo nel nodo 'SINK'. Se il cammino non esiste, viene restituita una lista vuota.
 \end{itemize}
+La sintassi di un nodo, affinch\`e sia interpretabile dal server, deve rispettare la seguente espressione regolare:
+$$
+\texttt{[0-9]+\_[0-9]+}
+$$
+La prima cifra rappresenta l'indice di riga del nodo che si vuole considerare, mentre la seconda rappresenta l'indice di colonna.
 \subsection{Web Controller}
 Al Web Controller sono delegate le operazioni di aggiunta e rimozione di griglie all'interno del database. Tali operazioni sono concesse solo previa autenticazione con username e password. Per implementare il login abbiamo utilizzato la classe WebSecurityConfig, che comunica al framework di abilitare il sistema di login nativo di Spring Boot, escludendo da esso gli URL relativi all'interfaccia REST e permettendo l'accesso a qualsiasi altro URL solamente se identificati con nome utente "user" e password "password".\\*
 Gli URL serviti dal Web Controller sono:
 \begin{itemize}
 	\item / $\rightarrow$ dalla root si accede a una pagina mediante la quale il client sceglie un particolare servizio del Web Controlller;
+
+	
 	\item /viewdb $\rightarrow$ viene renderizzata una pagina HTML nella quale sono riportate tutte le griglie presenti nel database;
+
 	\item /addtable $\rightarrow$ viene renderizzata una pagina HTML che prevede l'immissione tramite un form di una griglia all'interno del database;
+	
 	\item /remtable $\rightarrow$ come addtable, ma il form richiede solo l'inserimento dell'id della griglia che si intende cancellare.
 \end{itemize}
-\subsection{Algoritmo di ricerca del cammino minimo}
-Per implementare la ricerca del cammino minimo abbiamo realizzato la classe Graph. Questa classe rappresenta in generale qualsiasi tipologia di grafo, di cui la griglia rappresenta un caso particolare. L'implementazione concreta dell'interfaccia IGridService, quando viene interrogata sul camminimo minimo, crea un'istanza della classe Graph partendo dalla matrice che rappresenta la griglia selezionata dal client. La classe Graph \`e composta da una collezione di nodi e una collezione di archi, i primi sono rappresentati da stringhe e i secondi da vettori di lunghezza 2, tali per cui in posizione 0 e in posizione 1 vi sono rispettivamente il nodo uscente e il nodo entrante del particolare arco che stiamo considerando. Dal punto di vista algoritmico dunque la ricerca del cammino minimo si traduce nella visita di un grafo, secondo il seguente algoritmo.
 \newpage
+	\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.7\linewidth]{Images/home}
+	\caption{Home page della web-app}
+	\label{fig:home}
+\end{figure}
+	\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.7\linewidth]{Images/addtable}
+	\caption{Form per l'inserimento di una nuova griglia}
+	\label{fig:home}
+\end{figure}
+	\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.7\linewidth]{Images/viewgrids}
+	\caption{Lista delle griglie salvate nel database}
+	\label{fig:home}
+\end{figure}
+	\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.7\linewidth]{Images/rem}
+	\caption{Form per il cancellamento di una griglia}
+	\label{fig:home}
+\end{figure}
+\newpage
+\subsection{Algoritmo di ricerca del cammino minimo}
+Per implementare la ricerca del cammino minimo in una griglia rappresentata dalla matrice A, la classe concreta che implementa IGridService (ConcreteGridService) opera nel modo seguente:
+\begin{itemize}
+	\item Per ogni nodo i,j di A tale che $A[i][j]>0$ aggiungi il nodo i,j a una lista \emph{nodes} di stringhe nella forma 	'$\texttt{i\_j}$';
+	\item Per ogni nodo n di nodes:
+	\begin{itemize}
+		\item Controlla quali vicini ha n (controllando gli indici di riga e colonna come specificato nel capitolo 1)
+		\item Se n ha un vicino n', allora aggiungi a una lista \emph{edges} di vettori di stringhe, l'arco $n\rightarrow n'$, dove ciascun arco e \`e un vettore di dimensione 2 tale per cui e$[0]=n$ ed e$[1]=n'$.
+	\end{itemize}
+\end{itemize}
+A questo punto il grafo \`e completamente rappresentato dalla lista dei suoi nodi e dalla lista suoi archi, ed \`e possibile applicarvi il seguente algoritmo di visita per ricercare il cammino minimo tra due nodi source e sink.
 \scriptsize
 \begin{lstlisting}
 Algoritmo cammino_minimo(source,sink):
@@ -72,6 +114,7 @@ Algoritmo cammino_minimo(source,sink):
 	fine se
 fine algoritmo
 \end{lstlisting}
+\normalsize
 \section{Client}
 Il Client utilizza l'interfaccia IClient per colloquiare con l'interfaccia REST del Server. Questa classe utilizza al suo interno un'altra interfaccia, IRestServiceClient. Quest'ultima utilizza il framework Apache Http Client col fine di eseguire richieste HTTP sui particolari URL dell'interfaccia REST del Server che abbiamo realizzato. L'interfaccia IClient permette all'utente di:
 \begin{itemize}
@@ -82,28 +125,28 @@ Il Client utilizza l'interfaccia IClient per colloquiare con l'interfaccia REST 
 Gli oggetti ricevuti sono stringhe JSON nel primo e nel terzo caso, mentre quando si riceve una particolare griglia, se ne riceve la serializzazione JSON. Una griglia serializzata tramite JSON viene poi caricata in memoria come un'istanza della classe GridFromServer; classe del tutto equivalente alla classe DatabaseGrid che abbiamo discusso in 3.1.1.
 \subsection{Interfaccia utente}
 L'applicazione mette a disposizione dell'utente la seguente interfaccia grafica per fare uso di un'implementazione concreta di IClient.
-\begin{figure}
+\begin{figure}[ht]
 	\centering
 	\includegraphics[width=0.7\linewidth]{Chapters/1}
 	\caption[Interfaccia utente]{Interfaccia del Client all'avvio del sistema}
 	\label{fig:1}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[ht]
 	\centering
 	\includegraphics[width=0.7\linewidth]{Chapters/2}
 	\caption[Interfaccia utente]{Richiedi tutte le griglie al Server}
 	\label{fig:2}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[ht]
 	\centering
 	\includegraphics[width=0.7\linewidth]{Chapters/3}
 	\caption[Interfaccia utente]{Richiedi griglia con id=1}
 	\label{fig:3}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[ht]
 	\centering
 	\includegraphics[width=0.7\linewidth]{Chapters/4}
 	\caption[Interfaccia utente]{Richiedi il cammino minimo nella griglia 1 da 0,0 a 2,2}
@@ -118,4 +161,4 @@ L'applicazione mette a disposizione dell'utente la seguente interfaccia grafica 
  	\item SOUTH
  \end{itemize}
 A ciascuna di questa sezione corrisponde un JPanel. JPanel \`e una classe di Swing che funziona come container di componenti come pulsanti, barre di inserimento testuale, men\`u, ecc. La classe JPanel pu\`o essere estesa col fine di riscrivere il suo metodo \emph{paintComponent(Graphics g)}, il metodo delegato al disegno del container. Questo \`e quanto avviene per il JPanel corrispondente al centro della finestra; infatti quest'ultimo \`e un'istanza della classe GUIpanel e rappresenta il punto centrale di tutta l'interfaccia grafica realizzata.\\*
-Un GUIpanel \`e un oggetto che ha al suo interno una matrice di punti indicizzati (ciascun punto \`e istanza della classe Point del medesimo framework) che possono essere creati e disegnati con differenti colori. Questa struttura si adatta al nostro sistema in quanto per visualizzare una griglia, oppure un cammino al suo interno, \`e sufficiente colorare i punti che fanno parte della griglia rispettivamente di colore rosso e di colore verde. I punti che non fanno parte della griglia e non sono indicizzati dalla matrice ricevuta dal server verranno disegnati come punti \emph{hidden} ossia dello stesso colore dello sfondo del container, cosicch\`e possano apparire all'utente come nascosti.
+Un GUIpanel \`e un oggetto che ha al suo interno una matrice di punti indicizzati (ciascun punto \`e istanza della classe Point del medesimo framework) che possono essere creati e disegnati con differenti colori. Questa struttura si adatta al nostro sistema in quanto per visualizzare una griglia, oppure un cammino al suo interno, \`e sufficiente colorare i punti che fanno parte della griglia rispettivamente di colore rosso e di colore verde. I punti che non fanno parte della griglia e non sono indicizzati dalla matrice ricevuta dal server verranno disegnati come punti \emph{hidden} ossia dello stesso colore dello sfondo del container, cosicch\`e possano apparire all'utente come nascosti. Infine, i nodi indicizzati dalla matrice ricevuta dal server che non fanno parte della griglia, sono visualizzati come punti di colore nero.
