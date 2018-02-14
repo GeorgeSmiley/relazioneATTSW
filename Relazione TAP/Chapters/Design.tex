@@ -14,10 +14,13 @@ Per l'interfaccia Web, invece, \`e previsto che questa debba permettere all'uten
 	\item Visualizzare tutte le griglie salvate nel database;
 	\item Eliminare una griglia dal database.
 \end{itemize}
-Entrambe le interfacce fanno uso di un'interfaccia interna all'applicazione: l'interfaccia \emph{IGridService}. Questa interfaccia ha il compito di fornire le operazioni necessarie per svolgere la funzione prevista dal sistema, ossia chi usa IGridService non vede i dettagli implementativi riguardanti come le operazioni di lettura e scrittura sul database vengono effettivamente realizzate. IGridService fornisce inoltre l'operazione di ricerca del cammino minimo, i cui dettagli verranno spiegati in seguito.
+Entrambe le interfacce fanno uso di un'interfaccia interna all'applicazione: l'interfaccia \emph{IGridService}. Questa interfaccia ha il compito di fornire le operazioni necessarie per svolgere la funzione prevista dal sistema, ossia chi usa IGridService non vede i dettagli implementativi riguardanti come le operazioni di lettura e scrittura sul database vengono effettivamente realizzate. IGridService fornisce inoltre l'operazione di ricerca del cammino minimo, i cui dettagli verranno spiegati in seguito.\\*
+IGridService viene estesa da una classe concreta (ConcreteGridService) che implementa direttamente l'algoritmo di ricerca del cammino minimo, delegando tutte le operazioni relative alla lettura e scrittura dal e sul database all'interfaccia IMongoRepository<DatabaseGrid,String>, estensione della generica interfaccia di Spring Boot MongoRepository<T,S>. Questa interfaccia definisce la mappatura tra oggetti DatabaseGrid salvati sul database e le stringhe ID che li identificano, mentre l'implementazione dei metodi di lettura e scrittura \`e definita dal bean iniettato dal framework a run-time (il quale \`e disponibile di default).\\*
+L'intero sviluppo del sistema client-server ha seguito la metodologia test-driven.\\*
+Nei classici modelli di sviluppo software a cascata, o a V, prima di poter scrivere il codice \`e necessario definire i requisiti funzionali e non funzionali del sistema da implementare, e i successivi test hanno lo scopo di verificare che il comportamento del sistema sia coerente rispetto ai requisiti derivati dall'analisi effettuata a priori. Solo dopo aver verificato che un certo sistema soddisfi le propriet\`a imposte dai requisiti pu\'o seguire il processo di \emph{validazione}. In tale fase, lo scopo \`e quello di validare un sistema sulla base delle funzionalit\`a attese dal cliente/committente.  Lo sviluppo test-driven accoppia le fasi di analisi dei requisiti e implementazione del codice, infatti scrivere i test prima del codice significa definire il requisito sotto forma di codice Java, e poi realizzare qualcosa che possa soddisfare il requisito appena definito. In quest'ottica, i test case che abbiamo scritto rappresentano altres\`i la definizione di \emph{tutti} i requisiti funzionali del sistema implementato.
 \subsection{Rappresentazione delle griglie}
 Un oggetto griglia salvato nel database, viene visto dall'interfaccia IGridService come un'istanza della classe \emph{DatabaseGrid}. Questa classe \`e un wrapper di una matrice di interi, la quale rappresenta il grafo. La classe DatabaseGrid aggiunge inoltre informazioni su una griglia associando ad essa un intero (id) e un intero n che rappresenta il numero massimo di righe e colonne che devono essere lette dalla matrice wrappata per estrapolarne la griglia.\\*
-Nonostante questa scelta sembra perdere di generalit\`a, in quanto considera solamente matrici quadrate, in realt\`a se volessimo rappresentare una griglia che non sia in generale quadrata, sarebbe sufficiente porre a 0 le righe o le colonne che non si vuole facciano parte del grafo.\\*
+Nonostante questa scelta sembra perdere di generalit\`a, in quanto considera solamente matrici quadrate, in realt\`a se volessimo rappresentare una griglia che non sia in generale quadrata, sarebbe sufficiente porre a $0$ le righe o le colonne che non si vuole facciano parte del grafo.\\*
 \subsection{REST Controller}
 Il REST Controller che abbiamo realizzato \`e una classe, opportunamente annotata secondo la struttura di Spring Boot, che a run-time serve determinate richieste HTTP su tre particolari URL:
 \begin{itemize}
@@ -27,7 +30,7 @@ Il REST Controller che abbiamo realizzato \`e una classe, opportunamente annotat
 \end{itemize}
 La sintassi di un nodo, affinch\`e sia interpretabile dal server, deve rispettare la seguente espressione regolare:
 $$
-\texttt{[0-9]+\_[0-9]+}
+[0-9]^+\texttt{\_}[0-9]^+
 $$
 La prima cifra rappresenta l'indice di riga del nodo che si vuole considerare, mentre la seconda rappresenta l'indice di colonna.
 \subsection{Web Controller}
@@ -162,3 +165,6 @@ L'applicazione mette a disposizione dell'utente la seguente interfaccia grafica 
  \end{itemize}
 A ciascuna di questa sezione corrisponde un JPanel. JPanel \`e una classe di Swing che funziona come container di componenti come pulsanti, barre di inserimento testuale, men\`u, ecc. La classe JPanel pu\`o essere estesa col fine di riscrivere il suo metodo \emph{paintComponent(Graphics g)}, il metodo delegato al disegno del container. Questo \`e quanto avviene per il JPanel corrispondente al centro della finestra; infatti quest'ultimo \`e un'istanza della classe GUIpanel e rappresenta il punto centrale di tutta l'interfaccia grafica realizzata.\\*
 Un GUIpanel \`e un oggetto che ha al suo interno una matrice di punti indicizzati (ciascun punto \`e istanza della classe Point del medesimo framework) che possono essere creati e disegnati con differenti colori. Questa struttura si adatta al nostro sistema in quanto per visualizzare una griglia, oppure un cammino al suo interno, \`e sufficiente colorare i punti che fanno parte della griglia rispettivamente di colore rosso e di colore verde. I punti che non fanno parte della griglia e non sono indicizzati dalla matrice ricevuta dal server verranno disegnati come punti \emph{hidden} ossia dello stesso colore dello sfondo del container, cosicch\`e possano apparire all'utente come nascosti. Infine, i nodi indicizzati dalla matrice ricevuta dal server che non fanno parte della griglia, sono visualizzati come punti di colore nero.
+
+
+
