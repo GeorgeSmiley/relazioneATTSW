@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.11.8)  14 FEB 2018 08:20
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.11.8)  17 FEB 2018 02:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1769,26 +1769,26 @@ Underfull \hbox (badness 10000) in paragraph at lines 22--24
 
  []
 
-[18] [19] [20] <Images/home.png, id=273, 288.07625pt x 177.66376pt>
+[18] [19] [20] <Images/home.png, id=274, 288.07625pt x 177.66376pt>
 File: Images/home.png Graphic file (type png)
 
 <use Images/home.png>
 Package pdftex.def Info: Images/home.png used on input line 52.
 (pdftex.def)             Requested size: 268.87737pt x 165.83011pt.
- <Images/addtable.png, id=274, 280.04625pt x 211.79124pt>
+ <Images/addtable.png, id=275, 280.04625pt x 211.79124pt>
 File: Images/addtable.png Graphic file (type png)
 
 <use Images/addtable.png>
 Package pdftex.def Info: Images/addtable.png used on input line 58.
 (pdftex.def)             Requested size: 268.87737pt x 203.35283pt.
 
-<Images/viewgrids.png, id=275, 258.9675pt x 179.67125pt>
+<Images/viewgrids.png, id=276, 258.9675pt x 179.67125pt>
 File: Images/viewgrids.png Graphic file (type png)
 
 <use Images/viewgrids.png>
 Package pdftex.def Info: Images/viewgrids.png used on input line 64.
 (pdftex.def)             Requested size: 268.87737pt x 186.56581pt.
- <Images/rem.png, id=276, 308.15125pt x 192.72pt>
+ <Images/rem.png, id=277, 308.15125pt x 192.72pt>
 File: Images/rem.png Graphic file (type png)
 
 <use Images/rem.png>
@@ -1803,25 +1803,25 @@ LaTeX Font Info:    Font shape `T1/fvm/bx/n' in size <8> not available
 LaTeX Font Info:    Font shape `T1/fvm/b/n' will be
 (Font)              scaled to size 6.80005pt on input line 95.
  [23]
-<Chapters/1.png, id=328, 1056.94875pt x 610.28pt>
+<Chapters/1.png, id=329, 1056.94875pt x 610.28pt>
 File: Chapters/1.png Graphic file (type png)
  <use Chapters/1.png>
 Package pdftex.def Info: Chapters/1.png used on input line 133.
 (pdftex.def)             Requested size: 268.87737pt x 155.24219pt.
 
-<Chapters/2.png, id=329, 953.5625pt x 610.28pt>
+<Chapters/2.png, id=330, 953.5625pt x 610.28pt>
 File: Chapters/2.png Graphic file (type png)
  <use Chapters/2.png>
 Package pdftex.def Info: Chapters/2.png used on input line 140.
 (pdftex.def)             Requested size: 268.87737pt x 172.07849pt.
 
-<Chapters/3.png, id=330, 952.55875pt x 606.265pt>
+<Chapters/3.png, id=331, 952.55875pt x 606.265pt>
 File: Chapters/3.png Graphic file (type png)
  <use Chapters/3.png>
 Package pdftex.def Info: Chapters/3.png used on input line 147.
 (pdftex.def)             Requested size: 268.87737pt x 171.13141pt.
 
-<Chapters/4.png, id=331, 949.5475pt x 606.265pt>
+<Chapters/4.png, id=332, 949.5475pt x 606.265pt>
 File: Chapters/4.png Graphic file (type png)
  <use Chapters/4.png>
 Package pdftex.def Info: Chapters/4.png used on input line 154.
@@ -1838,25 +1838,37 @@ chapter 4.
 
 
 
-] [28]) [29]
+] [28]) [29] [30]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 160.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 160.
- (./main.aux (./titlePage.aux) (./Chapters/Implementazione.aux)
-(./Chapters/Tecniche.aux) (./Chapters/Design.aux) (./Chapters/Problemi.aux))
+ (./main.aux (./titlePage.aux)
+(./Chapters/Implementazione.aux) (./Chapters/Tecniche.aux)
+(./Chapters/Design.aux) (./Chapters/Problemi.aux)
+
+Package mparhack Warning: Marginpars may have changed.
+(mparhack)                Rerun to get them right.
+
+)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 160.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 160.
-Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 674CA1EF9B8079B02C86767E5699F77D;1833.
 
+
+Package rerunfilecheck Warning: File `main.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `main.out':
+(rerunfilecheck)             Before: 674CA1EF9B8079B02C86767E5699F77D;1833
+(rerunfilecheck)             After:  B3988A6FBADBBF11E9CEA876C47CBEC6;1902.
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 37221 strings out of 493029
- 704264 string characters out of 6136234
- 891927 words of memory out of 5000000
- 39621 multiletter control sequences out of 15000+600000
+ 37224 strings out of 493029
+ 704301 string characters out of 6136234
+ 891926 words of memory out of 5000000
+ 39622 multiletter control sequences out of 15000+600000
  85122 words of font info for 385 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  64i,13n,73p,10371b,1107s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1872,10 +1884,10 @@ usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/latxfont/lcircle1.pfb>
 </usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/share/
 texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on main.pdf (29 pages, 274725 bytes).
+Output written on main.pdf (30 pages, 275693 bytes).
 PDF statistics:
- 429 PDF objects out of 1000 (max. 8388607)
- 364 compressed objects within 4 object streams
- 109 named destinations out of 1000 (max. 500000)
+ 434 PDF objects out of 1000 (max. 8388607)
+ 368 compressed objects within 4 object streams
+ 111 named destinations out of 1000 (max. 500000)
  69394 words of extra memory for PDF output out of 74296 (max. 10000000)
 

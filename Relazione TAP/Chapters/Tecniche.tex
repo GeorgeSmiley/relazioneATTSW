@@ -35,3 +35,5 @@ L'interfaccia del Client non \`e la sola interfaccia utente realizzata, infatti,
 Per implementare le richieste HTTP del Client abbiamo scelto il framework \emph{Apache HttpClient} che mette a disposizione le classi necessarie per effettuare richieste HTTP su un particolare server (es. GET oppure POST) evitando di scrivere direttamente codice che usi le classiche Socket.
 \subsection{GUI}
 Il framework scelto per la realizzazione dell'interfaccia grafica \`e \emph{Swing}. Questo framework ci ha permesso di integrare Apache Http Client con una semplice interfaccia utente composta da una singola finestra (JFrame).
+\subsection{End to end test}
+Per implementare gli end to end test, \`e stato usato il framework selenium; in particolare HtmlUnitDriver \`e stato utilizzato per popolare il database sul server prima dell'esecuzione dei test, e per eliminarne il contenuto alla fine di ogni test.
