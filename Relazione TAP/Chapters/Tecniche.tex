@@ -1,9 +1,8 @@
 \chapter{Tecniche e framework utilizzati}
 \section{Code versioning}
-Per tenere traccia della storia dei codici di Server e Client abbiamo utilizzato il software \emph{git} creando una repository locale connessa a una repository remota su \emph{github}. Le repository remote utilizzate sono disponibili per la consultazione ai seguenti URL:
+Per tenere traccia della storia dei codici di Server e Client abbiamo utilizzato il software \emph{git} creando una repository locale connessa a una repository remota su \emph{github}. La repository remota utilizzata \`e disponibile per la consultazione al seguente URL:
 \begin{itemize}
-	\item Server - \url{https://github.com/alexfoglia1/attsw-server}
-	\item Client - \url{https://github.com/francescosecci/sp-client-attsw}
+	\item \url{https://github.com/alexfoglia1/attsw-server}
 \end{itemize}
 L'utilizzo di \emph{git} si \`e rivelato particolarmente utile per il lavoro in gruppo, grazie al meccanismo delle \emph{pull requests}. Il workflow che abbiamo seguito prevedeva di aprire un ramo ogni qualvolta un membro del gruppo volesse implementare una particolare \emph{feature} all'interno dei software. Abbiamo dunque realizzato sul master tutte le interfacce di cui gli applicativi faranno uso e creato un ramo per ogni loro singola implementazione. Quando una particolare implementazione veniva terminata, allora procedevamo al \emph{merge} del ramo sul master risolvendo gli eventuali conflitti generati, mediante l'interfaccia di \emph{github}.\\*
 Non abbiamo sollevato alcuna \emph{issue} perch\`e abbiamo lavorato per la maggior parte del tempo nel medesimo luogo fisico.\\*
@@ -16,7 +15,7 @@ clean verify -Pjacoco coveralls:report
 clean verify -Pjacoco sonar:sonar
 clean verify -Pfailsafe
 \end{lstlisting}
-Il profilo jacoco serve a generare i report sugli unit test e ad inviarli rispettivamente ai server di \emph{Coveralls} e di \emph{SonarQube} (\emph{SonarCloud}); mentre il profilo failsafe esegue sia gli unit test che gli integration test (esclusi gli end to end test implementati nel Client), ed \`e proprio quest'ultima build quella che effettuiamo anche in locale. Questi profili sono utlizzati sia nel Client che nel Server.
+Il profilo jacoco serve a generare i report sugli unit test e ad inviarli rispettivamente ai server di \emph{Coveralls} e di \emph{SonarQube} (\emph{SonarCloud}); mentre il profilo failsafe esegue sia gli unit test che gli integration test ed \`e proprio quest'ultima build quella che effettuiamo anche in locale. Dal momento che il codice del progetto si articola in 3 moduli (Client, Server, End2End), il comando di build viene eseguito nella directory del parent pom che accomuna i sopracitati moduli.
 \section{Continuos integration}
 Le repository elencate in 2.1 sono collegate al server di Continuos Integration \emph{Travis} attraverso il file \emph{.travis.yml}. Questo file rappresenta lo script che \emph{Travis} deve eseguire sulle macchine remote al fine di ricreare un ambiente in cui \`e possibile lanciare le stesse build che effettuiamo anche in locale. Per ricreare l'ambiente \emph{Travis} viene configurato in modo tale da usare il servizio Docker, ma \`e solo durante la build che viene lanciato il container Docker di MongoDB, in quanto il profilo failsafe, che deve eseguire gli integration test, \`e stato appositamente configurato per lanciare il container Docker legandone il relativo plugin alla fase \emph{pre-integration-test}. Dal momento che ciascuna build viene eseguita usando i profili jacoco e failsafe definiti nel POM, questa genera i report su \emph{Coveralls} e \emph{SonarCloud} sia nel caso in cui la build venga fatta in locale che sui server di \emph{Travis}. 
 \section{Frameworks}
@@ -36,4 +35,4 @@ Per implementare le richieste HTTP del Client abbiamo scelto il framework \emph{
 \subsection{GUI}
 Il framework scelto per la realizzazione dell'interfaccia grafica \`e \emph{Swing}. Questo framework ci ha permesso di integrare Apache Http Client con una semplice interfaccia utente composta da una singola finestra (JFrame).
 \subsection{End to end test}
-Per implementare gli end to end test, \`e stato usato il framework selenium; in particolare HtmlUnitDriver \`e stato utilizzato per popolare il database sul server prima dell'esecuzione dei test, e per eliminarne il contenuto alla fine di ogni test.
+Gli end to end test sono stati implementati usando Selenium per simulare la comunicazione browser-server; mentre Cucumber \`e il framework utilizzato per implementare gli end to end test secondo una tecnica BDD.

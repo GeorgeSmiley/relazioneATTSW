@@ -28,7 +28,7 @@
 \contentsline {section}{\numberline {4.1}Integration test su Mac}{27}{section.4.1}
 \contentsline {section}{\numberline {4.2}Build Mac del Server su Travis}{27}{section.4.2}
 \contentsline {section}{\numberline {4.3}End to end test}{27}{section.4.3}
-\contentsline {section}{\numberline {4.4}Deployment su heroku}{28}{section.4.4}
-\contentsline {section}{\numberline {4.5}Utilizzo di due differenti database}{28}{section.4.5}
-\contentsline {section}{\numberline {4.6}Mutation testing con PitClipse}{29}{section.4.6}
-\contentsline {section}{\numberline {4.7}Testing dell'interfaccia grafica}{29}{section.4.7}
+\contentsline {section}{\numberline {4.4}Utilizzo di due differenti database}{28}{section.4.4}
+\contentsline {section}{\numberline {4.5}Mutation testing con PitClipse}{29}{section.4.5}
+\contentsline {section}{\numberline {4.6}Testing dell'interfaccia grafica}{29}{section.4.6}
+\contentsline {section}{\numberline {4.7}End To End Testing}{30}{section.4.7}
