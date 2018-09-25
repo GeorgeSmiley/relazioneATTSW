@@ -1,16 +1,15 @@
-\select@language {italian}
-\select@language {italian}
+\babel@toc {italian}{}
+\babel@toc {italian}{}
 \deactivateaddvspace 
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {1}{\ignorespaces Schema UML-Like}}{11}{figure.caption.6}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {2}{\ignorespaces Home page della web-app\relax }}{21}{figure.caption.7}
-\contentsline {figure}{\numberline {3}{\ignorespaces Form per l'inserimento di una nuova griglia\relax }}{21}{figure.caption.8}
-\contentsline {figure}{\numberline {4}{\ignorespaces Lista delle griglie salvate nel database\relax }}{22}{figure.caption.9}
-\contentsline {figure}{\numberline {5}{\ignorespaces Form per il cancellamento di una griglia\relax }}{22}{figure.caption.10}
-\contentsline {figure}{\numberline {6}{\ignorespaces Interfaccia utente}}{24}{figure.caption.11}
-\contentsline {figure}{\numberline {7}{\ignorespaces Interfaccia utente}}{24}{figure.caption.12}
-\contentsline {figure}{\numberline {8}{\ignorespaces Interfaccia utente}}{25}{figure.caption.13}
-\contentsline {figure}{\numberline {9}{\ignorespaces Interfaccia utente}}{25}{figure.caption.14}
+\contentsline {figure}{\numberline {3}{\ignorespaces Form per l'inserimento di una nuova griglia\relax }}{22}{figure.caption.8}
+\contentsline {figure}{\numberline {4}{\ignorespaces Lista delle griglie salvate nel database e link per rimuoverle\relax }}{23}{figure.caption.9}
+\contentsline {figure}{\numberline {5}{\ignorespaces Interfaccia utente}}{24}{figure.caption.10}
+\contentsline {figure}{\numberline {6}{\ignorespaces Interfaccia utente}}{25}{figure.caption.11}
+\contentsline {figure}{\numberline {7}{\ignorespaces Interfaccia utente}}{25}{figure.caption.12}
+\contentsline {figure}{\numberline {8}{\ignorespaces Interfaccia utente}}{26}{figure.caption.13}
 \addvspace {10\p@ }

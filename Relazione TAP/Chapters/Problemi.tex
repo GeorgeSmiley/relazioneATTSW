@@ -1,11 +1,9 @@
 \chapter{Problemi incontrati}
 In questo capitolo parleremo dei problemi che abbiamo incontrato sia durante la stesura del codice che durante l'utilizzo delle tecniche oggetto di questo corso.
 \section{Integration test su Mac}
-Abbiamo avuto un problema relativo all'esecuzione degli Integration Test dell'interfaccia grafica del client su Mac OS X. Il problema \`e stato risolto includendo nel POM un modulo della libreria AssertJ che era richiesto a run-time dal sistema Mac. Per essere poi sicuri che successive modifiche continuassero a non creare problemi su Mac OS, ne abbiamo abilitato la relativa build su travis grazie al meccanismo delle build \emph{matrix}.
+Abbiamo avuto un problema relativo all'esecuzione degli Integration Test dell'interfaccia grafica del client su Mac OS X. Il problema \`e stato risolto includendo nel POM un modulo della libreria AssertJ che era richiesto a run-time dal sistema Mac.
 \section{Build Mac del Server su Travis}
-Come riportato nella documentazione di Travis, quest'ultimo non supporta l'utilizzo di Docker sulle macchine remote quando impostate per utilizzare Mac OS; pertanto siamo stati costretti a disabilitare la build su Mac per quanto riguarda il server.
-\section{End to end test}
-Per realizzare gli end to end test abbiamo scritto un Junit test case che utilizzasse un server non mockato. Tuttavia questa particolare circostanza impone che prima del lancio del test venga eseguito il server in locale, cosa non implementabile in automatico su Travis. Per risolvere questa problematica abbiamo escluso la classe riguardante gli end to end test dalla build di maven, ma l'abbiamo lasciata a disposizione per il suo lancio direttamente da eclipse. Al fine di verificare che gli end to end test passassero anche quando l'applicazione Server non risiede esclusivamente sulla stessa macchina locale in cui si lancia il Client (localhost) abbiamo eseguito il deploy dell'applicazione su heroku (all'indirizzo \url{http://attsw-server.herokuapp.com}) in modo tale da poter inserire questo URL negli end to end test al posto del semplice localhost.
+Come riportato nella documentazione di Travis, quest'ultimo non supporta l'utilizzo di Docker sulle macchine remote quando impostate per utilizzare Mac OS; pertanto siamo stati costretti a disabilitare la build su Mac.
 \section{Utilizzo di due differenti database}
 Abbiamo provato anche ad integrare un database MySQL all'interno del Server, tuttavia in corso d'opera sono sorti numerosi problemi le cui soluzioni avevano complicato troppo la struttura delle classi. I principali problemi incontrati sono stati:
 \begin{itemize}

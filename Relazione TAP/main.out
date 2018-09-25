@@ -21,8 +21,7 @@
 \BOOKMARK [0][-]{chapter.4}{Problemi incontrati}{}% 21
 \BOOKMARK [1][-]{section.4.1}{Integration test su Mac}{chapter.4}% 22
 \BOOKMARK [1][-]{section.4.2}{Build Mac del Server su Travis}{chapter.4}% 23
-\BOOKMARK [1][-]{section.4.3}{End to end test}{chapter.4}% 24
-\BOOKMARK [1][-]{section.4.4}{Utilizzo di due differenti database}{chapter.4}% 25
-\BOOKMARK [1][-]{section.4.5}{Mutation testing con PitClipse}{chapter.4}% 26
-\BOOKMARK [1][-]{section.4.6}{Testing dell'interfaccia grafica}{chapter.4}% 27
-\BOOKMARK [1][-]{section.4.7}{End To End Testing}{chapter.4}% 28
+\BOOKMARK [1][-]{section.4.3}{Utilizzo di due differenti database}{chapter.4}% 24
+\BOOKMARK [1][-]{section.4.4}{Mutation testing con PitClipse}{chapter.4}% 25
+\BOOKMARK [1][-]{section.4.5}{Testing dell'interfaccia grafica}{chapter.4}% 26
+\BOOKMARK [1][-]{section.4.6}{End To End Testing}{chapter.4}% 27
